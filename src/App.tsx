@@ -3,11 +3,15 @@ import * as tf from '@tensorflow/tfjs-core';
 // Register one of the TF.js backends.
 import '@tensorflow/tfjs-backend-webgl';
 // import '@tensorflow/tfjs-backend-wasm';
-import './App.css'
 import {Camera} from "./camera.ts";
 import {RendererCanvas2d} from './renderer_canvas2d.ts'
 import {STATE} from "./params.ts";
 import {PoseDetector} from "@tensorflow-models/pose-detection/dist/pose_detector";
+import "./index.css"
+import "./App.css"
+import GlassmorphismCard from "./component/GlassmorphismCard.tsx";
+import {useEffect} from "react";
+import Icon from './assets/react.svg'
 
 export async function setBackendAndEnvFlags() {
     const flagConfig = {
@@ -62,8 +66,18 @@ async function renderResult() {
     renderer.draw(rendererParams);
 }
 
-
 function App() {
+
+    useEffect(() => {
+        Notification.requestPermission().then((result) => {
+            console.log(result);
+        });
+
+        setTimeout(() => {
+            const n = new Notification("My Great Song");
+            console.log('-===-------------------')
+        }, 5000)
+    }, [])
 
 
     async function initVideo(v: HTMLVideoElement | null) {
@@ -72,7 +86,7 @@ function App() {
             await Camera.setup(video)
             await setBackendAndEnvFlags()
 
-            const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING};
+            const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_THUNDER};
             detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig);
 
             const canvas = document.getElementById('output') as HTMLCanvasElement;
@@ -91,8 +105,18 @@ function App() {
     return (
         <>
             <canvas id="output"></canvas>
-            <video ref={(v) => initVideo(v)}></video>
+            <video className={'absolute left-[-9999px] top-[-9999px]'} ref={(v) => initVideo(v)}></video>
             <div id="scatter-gl-container"></div>
+            <div className={"main absolute w-full left-0 top-0 h-full z-[10]"}>
+                <div className={'fixed top-[30px] right-[30px]'}>
+                    <GlassmorphismCard>
+                        <div className={'w-[300px] p-[20px] h-[600px] text-white drop-shadow-sm'}>
+                            Pixie
+                            The Frontend Unicorn
+                        </div>
+                    </GlassmorphismCard>
+                </div>
+            </div>
         </>
     )
 }

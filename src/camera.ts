@@ -10,14 +10,17 @@ export class Camera {
                 'Browser API navigator.mediaDevices.getUserMedia not available');
         }
 
+        console.log(' window.document.body.clientWidth',  window.document.body.clientWidth)
+        console.log("window.document.body.clientHeight", window.document.body.clientHeight)
+
         const videoConfig = {
             'audio': false,
             'video': {
                 facingMode: 'user',
                 // Only setting the video to a specified size for large screen, on
                 // mobile devices accept the default size.
-                width: VIDEO_SIZE['360 X 270'].width,
-                height: VIDEO_SIZE['360 X 270'].height,
+                width: window.screen.availWidth,
+                height: window.screen.availHeight,
                 frameRate: {
                     ideal: 60,
                 }
