@@ -133,7 +133,7 @@ export class RendererCanvas2d {
   drawKeypoints(keypoints: any) {
     const keypointInd =
         posedetection.util.getKeypointIndexBySide(params.STATE.model);
-    this.ctx.fillStyle = 'Red';
+    this.ctx.fillStyle = 'Yellow';
     this.ctx.strokeStyle = 'White';
     this.ctx.lineWidth = params.DEFAULT_LINE_WIDTH;
 

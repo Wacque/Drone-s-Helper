@@ -12,6 +12,7 @@ import "./App.css"
 import GlassmorphismCard from "./component/GlassmorphismCard.tsx";
 import {useEffect} from "react";
 import Icon from './assets/react.svg'
+import Cover from './assets/cover.png'
 
 export async function setBackendAndEnvFlags() {
     const flagConfig = {
@@ -86,7 +87,7 @@ function App() {
             await Camera.setup(video)
             await setBackendAndEnvFlags()
 
-            const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_THUNDER};
+            const detectorConfig = {modelType: poseDetection.movenet.modelType.MULTIPOSE_LIGHTNING};
             detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig);
 
             const canvas = document.getElementById('output') as HTMLCanvasElement;
@@ -108,14 +109,15 @@ function App() {
             <video className={'absolute left-[-9999px] top-[-9999px]'} ref={(v) => initVideo(v)}></video>
             <div id="scatter-gl-container"></div>
             <div className={"main absolute w-full left-0 top-0 h-full z-[10]"}>
-                <div className={'fixed top-[30px] right-[30px]'}>
-                    <GlassmorphismCard>
-                        <div className={'w-[300px] p-[20px] h-[600px] text-white drop-shadow-sm'}>
-                            Pixie
-                            The Frontend Unicorn
-                        </div>
-                    </GlassmorphismCard>
-                </div>
+                <img className={'w-full block'} src={Cover} alt=""/>
+                {/*<div className={'fixed top-[30px] right-[30px]'}>*/}
+                {/*    <GlassmorphismCard>*/}
+                {/*        <div className={'w-[300px] p-[20px] h-[600px] text-white drop-shadow-sm'}>*/}
+                {/*            Pixie*/}
+                {/*            The Frontend Unicorn*/}
+                {/*        </div>*/}
+                {/*    </GlassmorphismCard>*/}
+                {/*</div>*/}
             </div>
         </>
     )
