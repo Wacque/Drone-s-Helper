@@ -2,8 +2,9 @@
     backdrop-filter: blur(6px) saturate(180%);
     -webkit-backdrop-filter: blur(6px) saturate(180%);
     background-color: rgba(17, 25, 40, 0.75);
-    border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.125);
-    width: fit-content;
-    height: fit-content;
+}
+.title {
+    @apply flex items-center justify-center text-white text-[18px] h-[40px];
+    font-weight: 500;
 }

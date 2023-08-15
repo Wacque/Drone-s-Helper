@@ -9,10 +9,8 @@ import {STATE} from "./params.ts";
 import {PoseDetector} from "@tensorflow-models/pose-detection/dist/pose_detector";
 import "./index.css"
 import "./App.css"
-import GlassmorphismCard from "./component/GlassmorphismCard.tsx";
-import {useEffect} from "react";
-import Icon from './assets/react.svg'
-import Cover from './assets/cover.png'
+import {useEffect, useRef, useState} from "react";
+import MainContent from "./component/MainContent.tsx";
 
 export async function setBackendAndEnvFlags() {
     const flagConfig = {
@@ -68,18 +66,27 @@ async function renderResult() {
 }
 
 function App() {
+    const [videoInitialized, setVideoInitialized] = useState(false);
+    const videoEle = useRef<HTMLVideoElement>(null);
+
 
     useEffect(() => {
-        Notification.requestPermission().then((result) => {
-            console.log(result);
-        });
-
-        setTimeout(() => {
-            const n = new Notification("My Great Song");
-            console.log('-===-------------------')
-        }, 5000)
+        // Notification.requestPermission().then((result) => {
+        //     console.log(result);
+        // });
+        //
+        // setTimeout(() => {
+        //     const n = new Notification("My Great Song");
+        //     console.log('-===-------------------')
+        // }, 5000)
     }, [])
 
+    useEffect(() => {
+        if(videoEle.current) {
+            void initVideo(videoEle.current)
+            setVideoInitialized(true)
+        }
+    }, [videoEle, videoEle.current]);
 
     async function initVideo(v: HTMLVideoElement | null) {
         if (v !== null) {
@@ -87,7 +94,7 @@ function App() {
             await Camera.setup(video)
             await setBackendAndEnvFlags()
 
-            const detectorConfig = {modelType: poseDetection.movenet.modelType.MULTIPOSE_LIGHTNING};
+            const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING};
             detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig);
 
             const canvas = document.getElementById('output') as HTMLCanvasElement;
@@ -105,20 +112,10 @@ function App() {
 
     return (
         <>
-            <canvas id="output"></canvas>
-            <video className={'absolute left-[-9999px] top-[-9999px]'} ref={(v) => initVideo(v)}></video>
+            <canvas id="output"/>
+            <video ref={videoEle} className={'absolute left-[-9999px] top-[-9999px]'}></video>
             <div id="scatter-gl-container"></div>
-            <div className={"main absolute w-full left-0 top-0 h-full z-[10]"}>
-                <img className={'w-full block'} src={Cover} alt=""/>
-                {/*<div className={'fixed top-[30px] right-[30px]'}>*/}
-                {/*    <GlassmorphismCard>*/}
-                {/*        <div className={'w-[300px] p-[20px] h-[600px] text-white drop-shadow-sm'}>*/}
-                {/*            Pixie*/}
-                {/*            The Frontend Unicorn*/}
-                {/*        </div>*/}
-                {/*    </GlassmorphismCard>*/}
-                {/*</div>*/}
-            </div>
+            {videoInitialized && <MainContent video={videoEle.current!}/>}
         </>
     )
 }

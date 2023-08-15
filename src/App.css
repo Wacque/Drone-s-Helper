@@ -1,8 +1,10 @@
 .main {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto Mono', monospace;
 }
 
 
 body {
   background: black;
+  height: 100vh;
+  overflow: hidden;
 }

@@ -1,0 +1,20 @@
+.decoration {
+    @apply  relative flex justify-center items-center flex-col mr-[10px] py-[2px];
+    &:before {
+        content: "";
+        @apply w-[6px] h-[6px] block bg-thePrimary rounded;
+    }
+    &:after {
+        content: "";
+        @apply w-[1px] flex-1 block bg-thePrimary mt-[3px];
+    }
+}
+@keyframes blink {
+    0%   {background-color: transparent;}
+    50%  {background-color: yellow;}
+    100% {background-color: transparent;}
+}
+
+.blinking {
+    animation: blink 1s ;
+}
