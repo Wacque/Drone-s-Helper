@@ -10,6 +10,7 @@ import "./App.css"
 import {useEffect, useRef, useState} from "react";
 import MainContent from "./component/MainContent.tsx";
 import AppProvider from "./provider/AppProvider.tsx";
+import Icon from "./assets/u16.svg"
 
 export async function setBackendAndEnvFlags() {
     const flagConfig = {
@@ -70,14 +71,18 @@ function App() {
 
 
     useEffect(() => {
-        // Notification.requestPermission().then((result) => {
-        //     console.log(result);
-        // });
-        //
-        // setTimeout(() => {
-        //     const n = new Notification("My Great Song");
-        //     console.log('-===-------------------')
-        // }, 5000)
+        Notification.requestPermission().then((result) => {
+            console.log(result);
+        });
+
+        setTimeout(() => {
+             new Notification("My Great Song", {
+                body: "Time to get up and dance!",
+                icon: Icon,
+                image: Icon,
+            });
+
+        }, 5000)
     }, [])
 
     useEffect(() => {
@@ -90,6 +95,7 @@ function App() {
     async function initVideo(v: HTMLVideoElement | null) {
         if (v !== null) {
             video = v
+            console.log(v.style)
             await Camera.setup(video)
             await setBackendAndEnvFlags()
 
@@ -99,8 +105,8 @@ function App() {
             const canvas = document.getElementById('output') as HTMLCanvasElement;
 
             if (canvas) {
-                canvas.width = video.width;
-                canvas.height = video.height;
+                canvas.width = parseInt(video.style.width);
+                canvas.height = parseInt(video.style.height)
             }
 
             renderer = new RendererCanvas2d(canvas);
@@ -112,7 +118,7 @@ function App() {
     return (
        <AppProvider>
             <canvas id="output"/>
-            <video style={{width: "100vw", height: "100vh"}} ref={videoEle} className={'absolute left-[-9999px] top-[-9999px]'}></video>
+            <video style={{width: window.screen.availWidth + "px", height:  window.screen.availHeight + "px"}} ref={videoEle} className={'absolute left-[-9999px] top-[-9999px]'}></video>
             <div id="scatter-gl-container"></div>
             {videoInitialized && <MainContent video={videoEle.current!}/>}
         </AppProvider>

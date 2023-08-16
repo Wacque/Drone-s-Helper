@@ -10,8 +10,8 @@ export class Camera {
                 'Browser API navigator.mediaDevices.getUserMedia not available');
         }
 
-        console.log(' window.document.body.clientWidth',  window.document.body.clientWidth)
-        console.log("window.document.body.clientHeight", window.document.body.clientHeight)
+        const width = parseInt(v.style.width)
+        const height = parseInt(v.style.height)
 
         const videoConfig = {
             'audio': false,
@@ -19,13 +19,15 @@ export class Camera {
                 facingMode: 'user',
                 // Only setting the video to a specified size for large screen, on
                 // mobile devices accept the default size.
-                width: window.screen.availWidth,
-                height: window.screen.availHeight,
+                width,
+                height,
                 frameRate: {
                     ideal: 60,
                 }
             }
         };
+
+        console.log('videoConfig', videoConfig)
 
         const stream = await navigator.mediaDevices.getUserMedia(videoConfig);
 
@@ -40,11 +42,11 @@ export class Camera {
 
         await v.play();
 
-        const videoWidth = v.videoWidth;
-        const videoHeight = v.videoHeight;
+        // const videoWidth = v.videoWidth;
+        // const videoHeight = v.videoHeight;
         // Must set below two lines, otherwise video element doesn't show.
-        v.width = videoWidth;
-        v.height = videoHeight;
+        // v.width = width;
+        // v.height = height;
 
         // const canvasContainer = document.querySelector('.canvas-wrapper');
         // canvasContainer.style = `width: ${videoWidth}px; height: ${videoHeight}px`;

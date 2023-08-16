@@ -1,0 +1,18 @@
+@keyframes show {
+    0%   {left: -1000px;}
+    100%  { left: 10px;}
+}
+
+@keyframes fadein {
+    0%   {opacity: 0;}
+    100%  {opacity: 1;}
+}
+
+.videoContainer {
+    animation: show .3s ;
+}
+
+.fadein {
+    animation:fadein .3s ;
+    animation-delay: .4s;
+}

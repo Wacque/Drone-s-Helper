@@ -8,7 +8,8 @@ export default {
 
         extend: {
             colors: {
-                thePrimary: "#ffffff"
+                thePrimary: "#ff8700",
+                thePrimary50: "rgba(255,135,0,0.5)"
             },
         },
     },

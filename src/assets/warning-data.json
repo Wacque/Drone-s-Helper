@@ -1,0 +1,22 @@
+[
+  {
+    "label": "stare at the screen",
+    "duration": 3900000,
+    "timestamp": 1692332136000
+  },
+  {
+    "label": "sitting",
+    "duration": 3600000,
+    "timestamp": 1692324936000
+  },
+  {
+    "label": "drinking",
+    "duration": 7200000,
+    "timestamp": 1692331356000
+  },
+  {
+    "label": "maintained the same posture for your neck",
+    "duration": 7200000,
+    "timestamp": 1692327756000
+  }
+]
