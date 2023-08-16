@@ -23,7 +23,7 @@ export class ActivityItem {
     }
 }
 
-export default memo(function MainContent({video}: { video: HTMLVideoElement }) {
+const MainContent = memo(function ({video}: { video: HTMLVideoElement }) {
         const {activities, setActivities} = useContext(AppContext)
         // const [activity, setActivity] = useState<Array<ActivityItem>>([]);
         const canvasRecognition = useRef<HTMLCanvasElement>(null);
@@ -133,3 +133,5 @@ export default memo(function MainContent({video}: { video: HTMLVideoElement }) {
         </div>
     }
 )
+
+export default MainContent
