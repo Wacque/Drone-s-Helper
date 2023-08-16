@@ -102,7 +102,6 @@ export default memo(function MainContent({video}: {video: HTMLVideoElement }) {
             <div className={'fixed grid grid-rows-1 gap-[20px] top-[30px] right-[30px]'}>
                 <GlassmorphismCard title={"HEALTH WARNING"}>
                     <div className={'w-[30vw] h-[26vh] overflow-y-scroll text-white drop-shadow-sm'}>
-
                     </div>
                 </GlassmorphismCard>
                 <GlassmorphismCard title={"STREAM"}>
