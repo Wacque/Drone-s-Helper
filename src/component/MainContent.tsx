@@ -1,12 +1,13 @@
 import GlassmorphismCard from "./GlassmorphismCard.tsx";
 import Scroll from "./Scroll.tsx";
 import StreamItem from "./StreamItem.tsx";
-import {useEffect, useRef, useState, memo} from "react";
+import {useEffect, useRef, memo, useContext} from "react";
 import axios from "axios";
+import {AppContext} from "../provider/AppProvider.tsx";
 
 let recognizerCanvas: HTMLCanvasElement
 let recognizerCtx: CanvasRenderingContext2D
-let recognizerInterval:  NodeJS.Timer | null = null
+let recognizerInterval: NodeJS.Timer | null = null
 
 export class ActivityItem {
     label: string = ""
@@ -21,12 +22,14 @@ export class ActivityItem {
         this.duration = duration
     }
 }
-export default memo(function MainContent({video}: {video: HTMLVideoElement }) {
-        const [activity, setActivity] = useState<Array<ActivityItem>>([]);
+
+export default memo(function MainContent({video}: { video: HTMLVideoElement }) {
+        const {activities, setActivities} = useContext(AppContext)
+        // const [activity, setActivity] = useState<Array<ActivityItem>>([]);
         const canvasRecognition = useRef<HTMLCanvasElement>(null);
 
         useEffect(() => {
-            if(recognizerInterval !== null) {
+            if (recognizerInterval !== null) {
                 clearInterval(recognizerInterval)
                 recognizerInterval = null
             }
@@ -68,13 +71,13 @@ export default memo(function MainContent({video}: {video: HTMLVideoElement }) {
                     const label = res.data["label"]
 
                     if (label) {
-                        setActivity(function (pre) {
-                            if(pre.length) {
+                        setActivities(function (pre) {
+                            if (pre.length) {
                                 const lastActivity = pre[pre.length - 1]
-                                if(lastActivity.label === label) {
+                                if (lastActivity.label === label) {
                                     console.log(lastActivity)
                                     const newTimestamp = new Date().getTime()
-                                    lastActivity.duration =  lastActivity.duration + (newTimestamp - lastActivity.timestamp)
+                                    lastActivity.duration = lastActivity.duration + (newTimestamp - lastActivity.timestamp)
                                     lastActivity.id = newTimestamp
 
                                     return [...pre.slice(0, pre.length - 1), lastActivity]
@@ -85,7 +88,7 @@ export default memo(function MainContent({video}: {video: HTMLVideoElement }) {
                         })
 
                         setTimeout(function () {
-                            console.log(activity)
+                            console.log(activities)
                         }, 2000)
                     }
                 } catch (e) {
@@ -98,7 +101,8 @@ export default memo(function MainContent({video}: {video: HTMLVideoElement }) {
 
         return <div className={"main absolute w-full left-0 top-0 h-full z-[10]"}>
             {/*<img className={'w-full block'} src={Cover} alt=""/>*/}
-            <canvas width={video.width} height={video.height} className={"absolute left-[-3000px]"} id={"outputForRecognition"} ref={canvasRecognition}/>
+            <canvas width={video.width} height={video.height} className={"absolute left-[-3000px]"}
+                    id={"outputForRecognition"} ref={canvasRecognition}/>
             <div className={'fixed grid grid-rows-1 gap-[20px] top-[30px] right-[30px]'}>
                 <GlassmorphismCard title={"HEALTH WARNING"}>
                     <div className={'w-[30vw] h-[26vh] overflow-y-scroll text-white drop-shadow-sm'}>
@@ -107,7 +111,7 @@ export default memo(function MainContent({video}: {video: HTMLVideoElement }) {
                 <GlassmorphismCard title={"STREAM"}>
                     <div className={'w-[30vw] h-[30vh] text-white drop-shadow-sm'}>
                         <Scroll list={[
-                            ...activity.map((item) => <StreamItem key={item.id} activity={item}/>).reverse()
+                            ...activities.map((item) => <StreamItem key={item.id} activity={item}/>).reverse()
                         ]}/>
                     </div>
                 </GlassmorphismCard>

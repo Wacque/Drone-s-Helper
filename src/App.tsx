@@ -11,6 +11,7 @@ import "./index.css"
 import "./App.css"
 import {useEffect, useRef, useState} from "react";
 import MainContent from "./component/MainContent.tsx";
+import AppProvider from "./provider/AppProvider.tsx";
 
 export async function setBackendAndEnvFlags() {
     const flagConfig = {
@@ -111,12 +112,12 @@ function App() {
     }
 
     return (
-        <>
+       <AppProvider>
             <canvas id="output"/>
             <video ref={videoEle} className={'absolute left-[-9999px] top-[-9999px]'}></video>
             <div id="scatter-gl-container"></div>
             {videoInitialized && <MainContent video={videoEle.current!}/>}
-        </>
+        </AppProvider>
     )
 }
 
