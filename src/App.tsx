@@ -1,8 +1,6 @@
 import * as poseDetection from '@tensorflow-models/pose-detection';
 import * as tf from '@tensorflow/tfjs-core';
-// Register one of the TF.js backends.
 import '@tensorflow/tfjs-backend-webgl';
-// import '@tensorflow/tfjs-backend-wasm';
 import {Camera} from "./camera.ts";
 import {RendererCanvas2d} from './renderer_canvas2d.ts'
 import {STATE} from "./params.ts";
@@ -87,7 +85,7 @@ function App() {
             void initVideo(videoEle.current)
             setVideoInitialized(true)
         }
-    }, [videoEle, videoEle.current]);
+    }, [videoEle]);
 
     async function initVideo(v: HTMLVideoElement | null) {
         if (v !== null) {
@@ -114,7 +112,7 @@ function App() {
     return (
        <AppProvider>
             <canvas id="output"/>
-            <video ref={videoEle} className={'absolute left-[-9999px] top-[-9999px]'}></video>
+            <video style={{width: "100vw", height: "100vh"}} ref={videoEle} className={'absolute left-[-9999px] top-[-9999px]'}></video>
             <div id="scatter-gl-container"></div>
             {videoInitialized && <MainContent video={videoEle.current!}/>}
         </AppProvider>

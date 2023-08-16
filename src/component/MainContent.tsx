@@ -23,7 +23,7 @@ export class ActivityItem {
     }
 }
 
-const MainContent = memo( ({video}: { video: HTMLVideoElement }) => {
+const MainContent = memo(({video}: { video: HTMLVideoElement }) => {
         const {activities, setActivities} = useContext(AppContext)
         // const [activity, setActivity] = useState<Array<ActivityItem>>([]);
         const canvasRecognition = useRef<HTMLCanvasElement>(null);
@@ -61,7 +61,7 @@ const MainContent = memo( ({video}: { video: HTMLVideoElement }) => {
                 formData.append('image', blob!, `${new Date().getTime()}.jpeg`);
 
                 try {
-                    const res = await axios.post('/api', formData, {
+                    const res = await axios.post('https://7a50-103-43-85-174.ngrok-free.app', formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data',
                             'Accept': 'application/json'
@@ -86,10 +86,6 @@ const MainContent = memo( ({video}: { video: HTMLVideoElement }) => {
 
                             return [...pre, new ActivityItem(label, 0)]
                         })
-
-                        setTimeout(function () {
-                            console.log(activities)
-                        }, 2000)
                     }
                 } catch (e) {
                     console.log(e)
@@ -100,7 +96,6 @@ const MainContent = memo( ({video}: { video: HTMLVideoElement }) => {
         }
 
         return <div className={"main absolute w-full left-0 top-0 h-full z-[10]"}>
-            {/*<img className={'w-full block'} src={Cover} alt=""/>*/}
             <canvas width={video.width} height={video.height} className={"absolute left-[-3000px]"}
                     id={"outputForRecognition"} ref={canvasRecognition}/>
             <div className={'fixed grid grid-rows-1 gap-[20px] top-[30px] right-[30px]'}>
