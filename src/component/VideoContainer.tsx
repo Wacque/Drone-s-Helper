@@ -15,7 +15,7 @@ export default function VideoContainer() {
     const getVideoSrc = function () {
         switch (showVideoLabel) {
             case WarningLabelMap["1"]:
-                return "https://www.youtube.com/embed/Ix_RTHcrZT8?autoplay=1&start=60"
+                return "https://www.youtube.com/embed/Ix_RTHcrZT8?autoplay=1&start=0"
             case WarningLabelMap["2"]:
                 return "https://www.youtube.com/embed/AMObqLsAxn8?autoplay=1&start=60"
             case WarningLabelMap["3"]:
@@ -30,7 +30,7 @@ export default function VideoContainer() {
 
     return <div className={`${styles.videoContainer} fixed top-[110px] left-[20px]`}>
       <GlassmorphismCard>
-          <iframe width="500" height="300" src={getVideoSrc()} title="YouTube video player"
+          <iframe width="500" height="282" src={getVideoSrc()} title="YouTube video player"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen></iframe>

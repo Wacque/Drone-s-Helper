@@ -57,8 +57,8 @@ export default function WarningItem({item}: { item: WarningActivity }) {
             </div>
         } else if (label === WarningLabelMap["3"]) {
             return <div>
-                You have consumed <UnderlineWrapper text={"less than 100ML of water"} label={label}/> in the last 2
-                hours, only achieving 30% of your daily water intake. Please <UnderlineWrapper text={"drink water"}
+                You have consumed <UnderlineWrapper text={"less than 300ML of water"} label={label}/> in the last 2
+                hours, only achieving 45% of your daily water intake. Please <UnderlineWrapper text={"drink water"}
                                                                                                label={label}/> in time.
             </div>
         } else return <div>

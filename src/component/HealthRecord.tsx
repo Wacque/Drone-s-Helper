@@ -22,7 +22,7 @@ export default function HealthRecord() {
     const getText = function (label: string) {
         switch (label) {
             case WarningLabelMap["1"]:
-                return "Accumulated water intake is 1.25L"
+                return "Accumulated water intake is 1.1L"
             case WarningLabelMap["2"]:
                 return "Health score 65 points"
             case WarningLabelMap["3"]:
