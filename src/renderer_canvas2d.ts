@@ -222,6 +222,8 @@ export class RendererCanvas2d {
       if (keypointInd.right.indexOf(i) > -1) {
         return '#ffa500' /* Orange */;
       }
+
+      return ""
     });
 
     if (!this.scatterGLHasInitialized) {

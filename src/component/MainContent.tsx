@@ -42,7 +42,7 @@ const MainContent = memo(({video}: { video: HTMLVideoElement }) => {
 
             recognizerInterval = setInterval(function () {
                 recognizer()
-            }, 3000)
+            }, 2000)
         }, []);
 
         function recognizer() {
@@ -69,7 +69,7 @@ const MainContent = memo(({video}: { video: HTMLVideoElement }) => {
 
                 try {
                     // https://7a50-103-43-85-174.ngrok-free.app
-                    const res = await axios.post('http://localhost:9999', formData, {
+                    const res = await axios.post('/', formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data',
                             'Accept': 'application/json'

@@ -8,3 +8,20 @@ body {
   height: 100vh;
   overflow: hidden;
 }
+
+/* 宽度 */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+
+/* 滑块 */
+::-webkit-scrollbar-thumb {
+  @apply bg-transparent;
+  border-radius: 0;
+}
+
+/* 轨道 */
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}

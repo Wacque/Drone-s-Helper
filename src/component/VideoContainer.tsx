@@ -15,13 +15,13 @@ export default function VideoContainer() {
     const getVideoSrc = function () {
         switch (showVideoLabel) {
             case WarningLabelMap["1"]:
-                return "https://www.youtube.com/embed/Q-pdnAhPbGo?autoplay=1"
+                return "https://www.youtube.com/embed/Ix_RTHcrZT8?autoplay=1&start=60"
             case WarningLabelMap["2"]:
-                return "https://www.youtube.com/embed/AMObqLsAxn8?autoplay=1"
+                return "https://www.youtube.com/embed/AMObqLsAxn8?autoplay=1&start=60"
             case WarningLabelMap["3"]:
-                return "https://www.youtube.com/embed/l9ObD_P2hNo?autoplay=1"
+                return "https://www.youtube.com/embed/l9ObD_P2hNo?autoplay=1&start=0"
             case WarningLabelMap["4"]:
-                return "https://www.youtube.com/embed/K4dmZ5_n6uU?autoplay=1"
+                return "https://www.youtube.com/embed/K4dmZ5_n6uU?autoplay=1&start=60"
         }
 
         return  ""

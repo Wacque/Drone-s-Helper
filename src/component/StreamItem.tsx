@@ -6,9 +6,17 @@ export default function StreamItem({activity}: { activity: ActivityItem}) {
         return `${new Date(timestamp).toLocaleDateString()} ${new Date(timestamp).toLocaleTimeString()}`
     }
 
+    function convertMilliseconds(milliseconds: number): string {
+        if (milliseconds < 60000) {
+            return `${Math.floor(milliseconds / 1000)}s`
+        } else {
+            return `${Math.floor(milliseconds / 60000)} min(s)`
+        }
+    }
+
     const getText = function () {
         return <span>
-            You are <u>{activity.label}</u>{activity.duration > 0 ? `, duration is ${activity.duration}` : null}
+            You are <u>{activity.label}</u>{activity.duration > 0 ? `, duration is ${convertMilliseconds(activity.duration)}` : null}
         </span>
     }
 

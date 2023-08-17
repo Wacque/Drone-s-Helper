@@ -11,5 +11,8 @@ export default defineConfig({
                 rewrite: (path) => path.replace(/^\/api/, ""),
             }
         }
+    },
+    build: {
+        outDir: "/Users/wurengui/Code/code-self/vit-base-patch16-224-in21k_human_activity_recognition/dist",
     }
 })
