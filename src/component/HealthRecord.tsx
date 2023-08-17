@@ -1,6 +1,5 @@
 import u81 from '../assets/u81.svg';
 import u82 from '../assets/u82.svg';
-import u83 from '../assets/u83.svg';
 import u84 from '../assets/u84.svg';
 import {WarningLabelMap} from "./WarningItem.tsx";
 import progress1 from '../assets/progress1.png'
@@ -12,11 +11,11 @@ export default function HealthRecord() {
 
     const getImage = function (label: string): string {
         if (label === WarningLabelMap["1"]) {
-            return u83
-        } else if (label === WarningLabelMap["2"]) {
             return u81
-        } else if (label === WarningLabelMap["3"]) {
+        } else if (label === WarningLabelMap["2"]) {
             return u84
+        } else if (label === WarningLabelMap["3"]) {
+            return u82
         } else return u82
     }
 

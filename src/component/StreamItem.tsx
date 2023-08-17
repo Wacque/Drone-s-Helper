@@ -1,18 +1,20 @@
 import styles from './StreamItem.module.scss'
 import {ActivityItem} from "./MainContent.tsx";
 
+export  function convertMilliseconds(milliseconds: number): string {
+    if (milliseconds < 60000) {
+        return `${Math.floor(milliseconds / 1000)}s`
+    } else {
+        return `${Math.floor(milliseconds / 60000)} min(s)`
+    }
+}
+
 export default function StreamItem({activity}: { activity: ActivityItem}) {
     const getDate = function (timestamp: number) {
         return `${new Date(timestamp).toLocaleDateString()} ${new Date(timestamp).toLocaleTimeString()}`
     }
 
-    function convertMilliseconds(milliseconds: number): string {
-        if (milliseconds < 60000) {
-            return `${Math.floor(milliseconds / 1000)}s`
-        } else {
-            return `${Math.floor(milliseconds / 60000)} min(s)`
-        }
-    }
+
 
     const getText = function () {
         return <span>

@@ -2,6 +2,7 @@ import ReactECharts from 'echarts-for-react';
 import {ActivityItem} from "./MainContent.tsx";
 import {AppContext} from "../provider/AppProvider.tsx";
 import {useContext} from "react";
+import {convertMilliseconds} from "./StreamItem.tsx";
 interface DataItem {
     name: string;
     id: number;
@@ -48,50 +49,51 @@ export default function ActivitiesTreeMap() {
             tooltip: {},
             series: [
                 {
-                    type: 'treemap',
-                    tooltip: {
 
+                    type: 'treemap',
+                    breadcrumb: false,
+                    tooltip: {
+                        backgroundColor: "black",
+                        textStyle: {
+                          color: "white",
+                          fontFamily: "Roboto Mono"
+                        },
+                        itemStyle: {
+                          backgroundColor: "black"
+                        },
+                        formatter: function (params: any) {
+                            return (
+                                params.data.name + " duration " +
+                                convertMilliseconds(params.data.value)
+                            );
+                        }
                     },
                     data: convertToDataItemList(activities),
                     label: {
                         position: 'insideTopLeft',
+                        fontFamily: "Roboto Mono",
+                    },
 
-                        rich: {
-                            budget: {
-                                fontSize: 22,
-                                lineHeight: 30,
-                                color: 'yellow'
+                    levels: [
+                        {
+                            itemStyle: {
+                                borderColor: '#fff',
                             },
-                            household: {
-                                fontSize: 14,
-                                color: '#fff'
-                            },
-                            label: {
-                                fontSize: 9,
-                                backgroundColor: 'rgba(0,0,0,0.3)',
-                                color: '#fff',
-                                borderRadius: 2,
-                                padding: [2, 4],
-                                lineHeight: 25,
-                                align: 'right'
-                            },
-                            name: {
-                                fontSize: 12,
-                                color: '#fff'
-                            },
-                            hr: {
-                                width: '100%',
-                                borderColor: 'rgba(255,255,255,0.2)',
-                                borderWidth: 0.5,
-                                height: 0,
-                                lineHeight: 10
-                            }
+
+                            color: [
+                                "hsl(36, 100%, 40%)",
+                                "hsl(36, 91.11111111111111%, 35.55555555555556%)",
+                                "hsl(36, 82.22222222222223%, 31.111111111111107%)",
+                                "hsl(36, 73.33333333333333%, 26.666666666666663%)",
+                                "hsl(36, 64.44444444444444%, 22.222222222222214%)",
+                                "hsl(36, 55.55555555555556%, 17.77777777777778%)",
+                                "hsl(36, 46.666666666666664%, 13.33333333333333%)",
+                                "hsl(36, 37.77777777777778%, 8.888888888888882%)",
+                                "hsl(36, 28.88888888888889%, 4.444444444444445%)",
+                                "hsl(36, 20%, 0%)"
+                            ]
                         }
-                    },
-                    itemStyle: {
-                        borderColor: '#fff',
-                        background: "red"
-                    },
+                    ],
                 }
             ]
         }

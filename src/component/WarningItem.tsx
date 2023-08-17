@@ -29,9 +29,9 @@ export default function WarningItem({item}: { item: WarningActivity }) {
         if (label === 'sitting') {
             return u83
         } else if (label === "stare at the screen") {
-            return u81
+            return  u84
         } else if (label === "drinking") {
-            return u84
+            return u81
         } else return u82
     }
 
