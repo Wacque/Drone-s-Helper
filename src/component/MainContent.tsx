@@ -10,6 +10,7 @@ import ActivitiesTreeMap from "./ActivitiesTreeMap.tsx";
 import HealthRecord from "./HealthRecord.tsx";
 import Icon from "../assets/u16.svg"
 import Setting from '../assets/u14.svg'
+import SettingContainer from "./SettingContainer.tsx";
 
 let recognizerCanvas: HTMLCanvasElement
 let recognizerCtx: CanvasRenderingContext2D
@@ -30,7 +31,7 @@ export class ActivityItem {
 }
 
 const MainContent = memo(({video}: { video: HTMLVideoElement }) => {
-        const {activities, appendActivity, warning, showVideoLabel} = useContext(AppContext)
+        const {activities, appendActivity, warning, showVideoLabel,showSetting, setShowSetting} = useContext(AppContext)
         // const [activity, setActivity] = useState<Array<ActivityItem>>([]);
         const canvasRecognition = useRef<HTMLCanvasElement>(null);
 
@@ -69,7 +70,7 @@ const MainContent = memo(({video}: { video: HTMLVideoElement }) => {
 
                 try {
                     // https://7a50-103-43-85-174.ngrok-free.app
-                    const res = await axios.post('/', formData, {
+                    const res = await axios.post('https://acque.cn', formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data',
                             'Accept': 'application/json'
@@ -93,19 +94,19 @@ const MainContent = memo(({video}: { video: HTMLVideoElement }) => {
             <canvas width={video.width} height={video.height} className={"absolute left-[-3000px]"}
                     id={"outputForRecognition"} ref={canvasRecognition}/>
             {showVideoLabel && <VideoContainer/>}
+            {showSetting && <SettingContainer/>}
             <a href="/">
                 <div className={'flex ml-[4px] mt-[4px] items-center '}>
                     <img src={Icon} alt=""/>
                     <div style={{fontWeight: 500, textShadow: "0 0 3px rgba(0,0,0,.5)"}} className={'text-[30px] text-thePrimary'}>GoodWorkingDays</div>
                 </div>
             </a>
-            <div className={'fixed left-[14px] bottom-[30px] cursor-pointer'}>
+            <div onClick={() => setShowSetting(!showSetting)} className={'fixed left-[14px] bottom-[30px] cursor-pointer'}>
                 <img src={Setting} alt=""/>
             </div>
 
-
             <div className={'fixed grid grid-rows-1 gap-[20px] top-[20px] right-[20px]'}>
-                <GlassmorphismCard title={"HEALTH WARNING"}>
+                <GlassmorphismCard title={"HEALTH ALERT"}>
                     <div className={'w-[30vw] h-[26vh] overflow-y-scroll text-white drop-shadow-sm'}>
                         <Scroll list={
                             [...warning.map((item) => <div className={'mb-[6px]'}><WarningItem key={item.timestamp} item={item}/></div>)]

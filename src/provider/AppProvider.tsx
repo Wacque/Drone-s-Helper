@@ -9,6 +9,8 @@ interface AppProviderProps {
     warning: Array<WarningActivity>,
     showVideo: (warningLabel: string) => void,
     showVideoLabel: string,
+    showSetting: boolean,
+    setShowSetting: (s: boolean) => void
 }
 
 export class WarningActivity {
@@ -31,6 +33,7 @@ export default function AppProvider({children}: { children: ReactNode }) {
     const [activities, setActivities] = useState<Array<ActivityItem>>([]);
     const [warning, setWarning] = useState<Array<WarningActivity>>([]);
     const [showVideoLabel, setShowVideoLabel] = useState<string>("");
+    const [showSetting, setShowSetting] = useState(false);
 
     useEffect(() => {
         initData()
@@ -76,7 +79,7 @@ export default function AppProvider({children}: { children: ReactNode }) {
         setShowVideoLabel(label)
     }
 
-    return <AppContext.Provider value={{activities, appendActivity, warning, showVideo, showVideoLabel}}>
+    return <AppContext.Provider value={{activities, appendActivity, warning, showVideo, showVideoLabel, showSetting, setShowSetting}}>
         {children}
     </AppContext.Provider>
 }
