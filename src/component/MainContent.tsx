@@ -13,7 +13,7 @@ import Setting from '../assets/u14.svg'
 
 let recognizerCanvas: HTMLCanvasElement
 let recognizerCtx: CanvasRenderingContext2D
-let recognizerInterval: NodeJS.Timer | null = null
+let recognizerInterval:   NodeJS.Timeout | null
 
 export class ActivityItem {
     label: string = ""
